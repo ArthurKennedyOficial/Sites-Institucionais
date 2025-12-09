@@ -6,14 +6,57 @@
     <title>MMJ Contabilidade | Tradição desde 1971</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 </head>
 <body>
-    <!-- Header com Logo -->
+    <!-- Botão WhatsApp Flutuante -->
+    <a href="https://wa.me/5537988888888?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20os%20serviços%20da%20MMJ%20Contabilidade" 
+       class="whatsapp-float" 
+       target="_blank" 
+       aria-label="Fale conosco no WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Botão Voltar ao Topo (esquerda) -->
+    <button class="back-to-top" id="backToTop">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <!-- Modal de Detalhes do Serviço -->
+    <div class="service-modal" id="serviceModal">
+        <div class="modal-content">
+            <button class="modal-close" id="modalClose">&times;</button>
+            <div class="modal-header">
+                <div class="modal-icon" id="modalIcon"></div>
+                <h2 id="modalTitle">Serviço</h2>
+            </div>
+            <div class="modal-body">
+                <div class="modal-description" id="modalDescription"></div>
+                <div class="modal-details" id="modalDetails"></div>
+                <div class="modal-benefits">
+                    <h3>Benefícios:</h3>
+                    <ul id="modalBenefits"></ul>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="btn btn-whatsapp" id="modalWhatsApp" target="_blank">
+                    <i class="fab fa-whatsapp"></i> Solicitar este serviço via WhatsApp
+                </a>
+                <button class="btn btn-secondary" id="modalContact">Outras formas de contato</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
     <header class="header" id="header">
         <div class="container header-container">
             <div class="logo-container">
                 <a href="#inicio" class="logo">
-                    <img src="Logo.png" alt="MMJ Contabilidade" class="logo-img">
+                    <!-- Logo como imagem -->
+                    <img src="midias/logo.webp" 
+                         alt="MMJ Contabilidade" 
+                         class="logo-img">
                 </a>
             </div>
 
@@ -25,22 +68,17 @@
                     <li><a href="#numeros" class="nav-link">Nossos Números</a></li>
                     <li><a href="#servicos" class="nav-link">Serviços</a></li>
                     <li><a href="#diferenciais" class="nav-link">Diferenciais</a></li>
-                    <li><a href="#estrutura" class="nav-link">Estrutura</a></li>
-                    <li><a href="hub-ferramentas.html" class="nav-link">Hub de Ferramentas</a></li>
+                    <li><a href="hub-ferramentas.html" class="nav-link">Ferramentas</a></li>
                     <li><a href="#contato" class="nav-link">Contato</a></li>
+                    <li><a href="area-cliente.html" class="btn-client">
+                        <i class="fas fa-user-circle"></i>
+                        <span>Área do Cliente</span>
+                    </a></li>
                 </ul>
             </nav>
 
-            <!-- Área do Cliente -->
-            <div class="client-area">
-                <a href="area-cliente.html" class="btn-client">
-                    <i class="fas fa-user-circle"></i>
-                    <span>Área do Cliente</span>
-                </a>
-            </div>
-
             <!-- Menu Mobile Toggle -->
-            <button class="mobile-toggle" id="mobileToggle">
+            <button class="mobile-toggle" id="mobileToggle" aria-label="Menu">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -55,7 +93,6 @@
                 <li><a href="#numeros" class="mobile-nav-link">Nossos Números</a></li>
                 <li><a href="#servicos" class="mobile-nav-link">Serviços</a></li>
                 <li><a href="#diferenciais" class="mobile-nav-link">Diferenciais</a></li>
-                <li><a href="#estrutura" class="mobile-nav-link">Estrutura</a></li>
                 <li><a href="hub-ferramentas.html" class="mobile-nav-link">Hub de Ferramentas</a></li>
                 <li><a href="#contato" class="mobile-nav-link">Contato</a></li>
                 <li><a href="area-cliente.html" class="mobile-nav-link client-link">
@@ -68,32 +105,44 @@
 
     <!-- Hero Section -->
     <section class="hero" id="inicio">
-        <div class="hero-overlay"></div>
         <div class="container hero-container">
             <div class="hero-content">
-                <h1 class="hero-title">Tradição e Modernidade desde 1971</h1>
-                <p class="hero-subtitle">Uma das maiores contabilidades do interior de Minas Gerais, oferecendo serviços com qualidade, eficiência e compromisso.</p>
+                <div class="hero-badge">
+                    <span>Desde 1971</span>
+                </div>
+                <h1 class="hero-title">
+                    Tradição e Modernidade<br>
+                    <span class="highlight">desde 1971</span>
+                </h1>
+                <p class="hero-subtitle">
+                    Uma das maiores contabilidades do interior de Minas Gerais, oferecendo serviços com qualidade, 
+                    eficiência e compromisso há mais de 5 décadas.
+                </p>
                 <div class="hero-buttons">
-                    <a href="#contato" class="btn btn-primary">Solicitar Orçamento</a>
-                    <a href="hub-ferramentas.html" class="btn btn-secondary">Acessar Ferramentas</a>
+                    <a href="#contato" class="btn btn-primary">
+                        <i class="fas fa-file-contract"></i>
+                        Solicitar Orçamento
+                    </a>
+                    <a href="#servicos" class="btn btn-secondary">
+                        <i class="fas fa-list-check"></i>
+                        Nossos Serviços
+                    </a>
                 </div>
             </div>
-            <div class="hero-stats">
-                <div class="stat-item">
-                    <span class="stat-number">53</span>
-                    <span class="stat-text">Anos de Experiência</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-number">+2000</span>
-                    <span class="stat-text">Clientes Ativos</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-number">+63</span>
-                    <span class="stat-text">Colaboradores</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-number">3</span>
-                    <span class="stat-text">Filiais</span>
+            
+            <div class="hero-video">
+                <div class="video-container">
+                    <div class="video-wrapper">
+                        <!-- Player de Vídeo Automático -->
+                        <video class="video-player" id="institutionalVideo" autoplay muted loop playsinline>
+                            <source src="midias/video.mp4" type="video/mp4">
+                            Seu navegador não suporta vídeos HTML5.
+                        </video>
+                        <div class="video-overlay" id="videoOverlay">
+                            <i class="fas fa-volume-mute"></i>
+                            <p>Clique para ativar o som</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -110,14 +159,29 @@
             <div class="sobre-content">
                 <div class="sobre-text">
                     <p>A MMJ Contabilidade atua desde 1971, sendo uma das maiores contabilidades do interior de Minas Gerais. Com mais de cinco décadas de experiência, oferecemos serviços com qualidade, eficiência e compromisso.</p>
-                    <p><strong>Missão:</strong> Auxiliar clientes a alcançarem crescimento, eficiência e lucratividade, sempre evoluindo e adotando as melhores soluções contábeis.</p>
+                    
+                    <div class="missao-box">
+                        <h3><i class="fas fa-bullseye"></i> Nossa Missão</h3>
+                        <p>Auxiliar clientes a alcançarem crescimento, eficiência e lucratividade, sempre evoluindo e adotando as melhores soluções contábeis.</p>
+                    </div>
+                    
                     <p>Nossa sede moderna e ampla está equipada com tecnologia de ponta em Pará de Minas (MG), atendendo clientes em todo o estado com uma equipe altamente qualificada.</p>
-                    <a href="#contato" class="btn btn-outline">Conheça Nossa Equipe</a>
+                    
+                    <a href="#contato" class="btn btn-outline">
+                        <i class="fas fa-handshake"></i>
+                        Conheça Nossa Equipe
+                    </a>
                 </div>
                 <div class="sobre-image">
-                    <div class="image-placeholder">
-                        <i class="fas fa-building"></i>
-                        <p>Sede Principal - Pará de Minas/MG</p>
+                    <!-- Campo para imagem responsiva -->
+                    <div class="responsive-image">
+                        <img src="midias/fundador.png" 
+                             alt="Fundador Mario Martins Jacinto" 
+                             class="image-fluid">
+                        <div class="image-caption">
+                            <p>Fundador e Presidente</p>
+                            <span>Mario Martins Jacinto</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -130,6 +194,7 @@
             <div class="section-header">
                 <span class="section-tag">Dados Atuais</span>
                 <h2 class="section-title">Nossa Trajetória em Números</h2>
+                <p class="section-subtitle">Mais de meio século construindo confiança e resultados</p>
             </div>
             <div class="numeros-grid">
                 <div class="numero-card">
@@ -143,7 +208,7 @@
                     <div class="numero-icon">
                         <i class="fas fa-user-tie"></i>
                     </div>
-                    <h3 class="numero-valor" data-target="600">0</h3>
+                    <h3 class="numero-valor" data-target="2000">0</h3>
                     <p class="numero-text">Clientes Ativos</p>
                 </div>
                 <div class="numero-card">
@@ -151,14 +216,14 @@
                         <i class="fas fa-users"></i>
                     </div>
                     <h3 class="numero-valor" data-target="60">0</h3>
-                    <p class="numero-text">Colaboradores</p>
+                    <p class="numero-text">Colaboradores Especializados</p>
                 </div>
                 <div class="numero-card">
                     <div class="numero-icon">
                         <i class="fas fa-map-marker-alt"></i>
                     </div>
-                    <h3 class="numero-valor" data-target="4">0</h3>
-                    <p class="numero-text">Filiais</p>
+                    <h3 class="numero-valor" data-target="3">0</h3>
+                    <p class="numero-text">Filiais Estratégicas</p>
                 </div>
             </div>
         </div>
@@ -170,125 +235,129 @@
             <div class="section-header">
                 <span class="section-tag">Nossos Serviços</span>
                 <h2 class="section-title">Soluções Completas</h2>
-                <p class="section-subtitle">Serviços especializados para sua empresa</p>
+                <p class="section-subtitle">Clique em cada serviço para ver detalhes</p>
             </div>
             <div class="servicos-grid">
-                <div class="servico-card">
+                <!-- Card 1 -->
+                <div class="servico-card" data-service="contabilidade">
                     <div class="servico-icon">
                         <i class="fas fa-calculator"></i>
                     </div>
                     <h3 class="servico-title">Assessoria Contábil</h3>
                     <p class="servico-desc">Gestão completa da contabilidade da sua empresa com relatórios precisos e atualizados.</p>
+                    <div class="servico-hover">
+                        <span>Clique para detalhes</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
                 </div>
-                <div class="servico-card">
+                
+                <!-- Card 2 -->
+                <div class="servico-card" data-service="fiscal">
                     <div class="servico-icon">
                         <i class="fas fa-file-invoice-dollar"></i>
                     </div>
                     <h3 class="servico-title">Assessoria Fiscal</h3>
                     <p class="servico-desc">Cumprimento de obrigações fiscais e otimização de tributos dentro da legalidade.</p>
+                    <div class="servico-hover">
+                        <span>Clique para detalhes</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
                 </div>
-                <div class="servico-card">
+                
+                <!-- Card 3 -->
+                <div class="servico-card" data-service="tributaria">
                     <div class="servico-icon">
                         <i class="fas fa-balance-scale"></i>
                     </div>
                     <h3 class="servico-title">Assessoria Tributária</h3>
                     <p class="servico-desc">Planejamento tributário estratégico para redução da carga fiscal de forma legal.</p>
+                    <div class="servico-hover">
+                        <span>Clique para detalhes</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
                 </div>
-                <div class="servico-card">
+                
+                <!-- Card 4 -->
+                <div class="servico-card" data-service="ambiental">
                     <div class="servico-icon">
                         <i class="fas fa-leaf"></i>
                     </div>
                     <h3 class="servico-title">Assessoria Ambiental</h3>
                     <p class="servico-desc">Consultoria para compliance ambiental e licenciamento de atividades.</p>
+                    <div class="servico-hover">
+                        <span>Clique para detalhes</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
                 </div>
-                <div class="servico-card">
+                
+                <!-- Card 5 -->
+                <div class="servico-card" data-service="trabalhista">
                     <div class="servico-icon">
                         <i class="fas fa-briefcase"></i>
                     </div>
                     <h3 class="servico-title">Assessoria Trabalhista</h3>
                     <p class="servico-desc">Gestão de rotinas trabalhistas e previdenciárias com foco na legislação vigente.</p>
+                    <div class="servico-hover">
+                        <span>Clique para detalhes</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
                 </div>
-                <div class="servico-card">
+                
+                <!-- Card 6 -->
+                <div class="servico-card" data-service="juridica">
                     <div class="servico-icon">
                         <i class="fas fa-gavel"></i>
                     </div>
                     <h3 class="servico-title">Assessoria Jurídica</h3>
                     <p class="servico-desc">Suporte legal especializado em direito empresarial, tributário e trabalhista.</p>
+                    <div class="servico-hover">
+                        <span>Clique para detalhes</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Diferenciais -->
-    <section class="diferenciais" id="diferenciais">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-tag">Por que nos escolher</span>
-                <h2 class="section-title">Nossos Diferenciais</h2>
+<section class="diferenciais" id="diferenciais">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-tag">Por que nos escolher</span>
+            <h2 class="section-title">Nossos Diferenciais</h2>
+        </div>
+        <div class="diferenciais-grid">
+            <div class="diferencial-card">
+                <div class="diferencial-icon">
+                    <i class="fas fa-history"></i>
+                </div>
+                <h3 class="diferencial-title">Tradição e Inovação</h3>
+                <p class="diferencial-desc">Mais de 50 anos no mercado combinados com as mais modernas tecnologias contábeis.</p>
             </div>
-            <div class="diferenciais-grid">
-                <div class="diferencial-card">
-                    <div class="diferencial-icon">
-                        <i class="fas fa-history"></i>
-                    </div>
-                    <h3 class="diferencial-title">Tradição e Inovação</h3>
-                    <p class="diferencial-desc">Mais de 50 anos no mercado combinados com as mais modernas tecnologias contábeis.</p>
+            <div class="diferencial-card">
+                <div class="diferencial-icon">
+                    <i class="fas fa-user-shield"></i>
                 </div>
-                <div class="diferencial-card">
-                    <div class="diferencial-icon">
-                        <i class="fas fa-user-shield"></i>
-                    </div>
-                    <h3 class="diferencial-title">Equipe Especializada</h3>
-                    <p class="diferencial-desc">+60 colaboradores com formação específica e atualização constante.</p>
+                <h3 class="diferencial-title">Equipe Especializada</h3>
+                <p class="diferencial-desc">+60 colaboradores com formação específica e atualização constante.</p>
+            </div>
+            <div class="diferencial-card">
+                <div class="diferencial-icon">
+                    <i class="fas fa-map-marked-alt"></i>
                 </div>
-                <div class="diferencial-card">
-                    <div class="diferencial-icon">
-                        <i class="fas fa-map-marked-alt"></i>
-                    </div>
-                    <h3 class="diferencial-title">Atendimento Regional</h3>
-                    <p class="diferencial-desc">4 filiais estrategicamente localizadas para melhor atender o interior mineiro.</p>
+                <h3 class="diferencial-title">Atendimento Regional</h3>
+                <p class="diferencial-desc">3 filiais estrategicamente localizadas para melhor atender o interior mineiro.</p>
+            </div>
+            <div class="diferencial-card">
+                <div class="diferencial-icon">
+                    <i class="fas fa-headset"></i>
                 </div>
-                <div class="diferencial-card">
-                    <div class="diferencial-icon">
-                        <i class="fas fa-headset"></i>
-                    </div>
-                    <h3 class="diferencial-title">Suporte Personalizado</h3>
-                    <p class="diferencial-desc">Atendimento dedicado e soluções customizadas para cada segmento de cliente.</p>
-                </div>
+                <h3 class="diferencial-title">Suporte Personalizado</h3>
+                <p class="diferencial-desc">Atendimento dedicado e soluções customizadas para cada segmento de cliente.</p>
             </div>
         </div>
-    </section>
-
-    <!-- Estrutura -->
-    <section class="estrutura" id="estrutura">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-tag">Infraestrutura</span>
-                <h2 class="section-title">Estrutura Moderna e Tecnológica</h2>
-                <p class="section-subtitle">Sede em Pará de Minas com tecnologia de ponta</p>
-            </div>
-            <div class="estrutura-content">
-                <div class="estrutura-image">
-                    <div class="image-placeholder large">
-                        <i class="fas fa-city"></i>
-                        <p>Sede Principal - Tecnologia de Ponta</p>
-                    </div>
-                </div>
-                <div class="estrutura-desc">
-                    <h3>Infraestrutura de Excelência</h3>
-                    <p>Nossa sede principal foi projetada para oferecer o melhor ambiente de trabalho para nossa equipe e o melhor atendimento para nossos clientes.</p>
-                    <ul class="estrutura-list">
-                        <li><i class="fas fa-check-circle"></i> Prédio moderno e amplo com mais de 2.000m²</li>
-                        <li><i class="fas fa-check-circle"></i> Tecnologia de ponta em sistemas contábeis</li>
-                        <li><i class="fas fa-check-circle"></i> Salas de reunião equipadas com videoconferência</li>
-                        <li><i class="fas fa-check-circle"></i> Infraestrutura de segurança digital e física</li>
-                        <li><i class="fas fa-check-circle"></i> Ambiente climatizado e acessível</li>
-                        <li><i class="fas fa-check-circle"></i> Estacionamento privativo para clientes</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
+    </div>
+</section>
 
     <!-- Contato -->
     <section class="contato" id="contato">
@@ -303,12 +372,15 @@
                     <form id="contactForm">
                         <div class="form-group">
                             <input type="text" id="nome" placeholder="Seu nome completo" required>
+                            <i class="fas fa-user"></i>
                         </div>
                         <div class="form-group">
                             <input type="email" id="email" placeholder="Seu e-mail" required>
+                            <i class="fas fa-envelope"></i>
                         </div>
                         <div class="form-group">
                             <input type="tel" id="telefone" placeholder="Seu telefone">
+                            <i class="fas fa-phone"></i>
                         </div>
                         <div class="form-group">
                             <select id="assunto" required>
@@ -321,54 +393,44 @@
                                 <option value="juridica">Assessoria Jurídica</option>
                                 <option value="outro">Outro assunto</option>
                             </select>
+                            <i class="fas fa-list"></i>
                         </div>
                         <div class="form-group">
                             <textarea id="mensagem" rows="5" placeholder="Sua mensagem" required></textarea>
+                            <i class="fas fa-comment"></i>
                         </div>
-                        <button type="submit" class="btn btn-primary btn-full">Enviar Mensagem</button>
+                        <button type="submit" class="btn btn-primary btn-full">
+                            <i class="fas fa-paper-plane"></i>
+                            Enviar Mensagem
+                        </button>
                     </form>
                 </div>
                 <div class="contato-info">
-                    <div class="info-item">
-                        <div class="info-icon">
-                            <i class="fas fa-map-marker-alt"></i>
-                        </div>
-                        <div class="info-content">
-                            <h4>Endereço Sede</h4>
-                            <p>Pará de Minas, Minas Gerais</p>
-                        </div>
+                    <div class="info-card">
+                        <h3><i class="fas fa-map-marker-alt"></i> Endereço Sede</h3>
+                        <p>Pará de Minas, Minas Gerais</p>
+                        <p>Estrutura moderna e tecnológica</p>
                     </div>
-                    <div class="info-item">
-                        <div class="info-icon">
-                            <i class="fas fa-phone"></i>
-                        </div>
-                        <div class="info-content">
-                            <h4>Telefone</h4>
-                            <p>(37) 3231-XXXX</p>
-                        </div>
+                    <div class="info-card">
+                        <h3><i class="fas fa-phone"></i> Telefone</h3>
+                        <p>(37) 3231-XXXX</p>
+                        <p>(37) 9XXXX-XXXX</p>
                     </div>
-                    <div class="info-item">
-                        <div class="info-icon">
-                            <i class="fas fa-envelope"></i>
-                        </div>
-                        <div class="info-content">
-                            <h4>E-mail</h4>
-                            <p>contato@mmjcontabilidade.com.br</p>
-                        </div>
+                    <div class="info-card">
+                        <h3><i class="fas fa-envelope"></i> E-mail</h3>
+                        <p>contato@mmjcontabilidade.com.br</p>
+                        <p>atendimento@mmjcontabilidade.com.br</p>
                     </div>
-                    <div class="info-item">
-                        <div class="info-icon">
-                            <i class="fas fa-clock"></i>
-                        </div>
-                        <div class="info-content">
-                            <h4>Horário de Atendimento</h4>
-                            <p>Segunda a Sexta: 8h às 18h</p>
-                        </div>
+                    <div class="info-card">
+                        <h3><i class="fas fa-clock"></i> Horário de Atendimento</h3>
+                        <p>Segunda a Sexta: 8h às 18h</p>
+                        <p>Sábado: 8h às 12h</p>
                     </div>
                     <div class="mapa-placeholder">
                         <div class="mapa-content">
                             <i class="fas fa-map"></i>
-                            <p>Mapa de Localização</p>
+                            <p>Localização - Pará de Minas/MG</p>
+                            <span>Clique para ver no mapa</span>
                         </div>
                     </div>
                 </div>
@@ -376,18 +438,16 @@
         </div>
     </section>
 
-    <!-- Botão Voltar ao Topo -->
-    <button class="back-to-top" id="backToTop">
-        <i class="fas fa-chevron-up"></i>
-    </button>
-
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-logo">
-                    <img src="Logo.png" alt="MMJ Contabilidade" class="footer-logo-img">
-                    <p>Tradição e Modernidade desde 1971</p>
+                    <img src="midias/logo.webp" 
+                         alt="MMJ Contabilidade" 
+                         class="footer-logo-img">
+                    <p class="footer-slogan">Tradição e Modernidade desde 1971</p>
+                    <p class="footer-desc">53 anos de excelência em serviços contábeis, fiscais e tributários para empresas de todos os portes.</p>
                 </div>
                 <div class="footer-links">
                     <h4>Links Rápidos</h4>
@@ -395,147 +455,55 @@
                         <li><a href="#inicio">Início</a></li>
                         <li><a href="#sobre">Sobre Nós</a></li>
                         <li><a href="#servicos">Serviços</a></li>
-                        <li><a href="hub-ferramentas.html">Hub de Ferramentas</a></li>
+                        <li><a href="#numeros">Nossos Números</a></li>
+                        <li><a href="#diferenciais">Diferenciais</a></li>
                         <li><a href="#contato">Contato</a></li>
                     </ul>
                 </div>
-                <div class="footer-services">
+                <div class="footer-servicos">
                     <h4>Serviços</h4>
                     <ul>
-                        <li>Assessoria Contábil</li>
-                        <li>Assessoria Fiscal</li>
-                        <li>Assessoria Tributária</li>
-                        <li>Assessoria Ambiental</li>
-                        <li>Assessoria Trabalhista</li>
-                        <li>Assessoria Jurídica</li>
+                        <li><a href="#servicos">Assessoria Contábil</a></li>
+                        <li><a href="#servicos">Assessoria Fiscal</a></li>
+                        <li><a href="#servicos">Assessoria Tributária</a></li>
+                        <li><a href="#servicos">Assessoria Ambiental</a></li>
+                        <li><a href="#servicos">Assessoria Trabalhista</a></li>
+                        <li><a href="#servicos">Assessoria Jurídica</a></li>
                     </ul>
                 </div>
                 <div class="footer-social">
-                    <h4>Siga-nos</h4>
+                    <h4>Conecte-se conosco</h4>
                     <div class="social-icons">
-                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#" aria-label="Facebook" class="social-icon">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" aria-label="Instagram" class="social-icon">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" aria-label="LinkedIn" class="social-icon">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" aria-label="YouTube" class="social-icon">
+                            <i class="fab fa-youtube"></i>
+                        </a>
                     </div>
                     <div class="newsletter">
                         <p>Receba nossas atualizações</p>
                         <form class="newsletter-form">
                             <input type="email" placeholder="Seu e-mail" required>
-                            <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                            <button type="submit">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
                         </form>
                     </div>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2024 MMJ Contabilidade. Todos os direitos reservados.</p>
+                <p>&copy; <span id="currentYear">2024</span> MMJ Contabilidade. Todos os direitos reservados.</p>
                 <p>Desenvolvido com <i class="fas fa-heart"></i> para nossos clientes</p>
             </div>
         </div>
     </footer>
-
-    <!-- Página Hub de Ferramentas -->
-    <div class="hub-page" id="hubPage" style="display: none;">
-        <div class="container">
-            <div class="hub-header">
-                <h1>Hub de Ferramentas</h1>
-                <p>Recursos úteis para contadores e empreendedores</p>
-            </div>
-            <div class="hub-grid">
-                <div class="hub-category">
-                    <h3><i class="fas fa-calculator"></i> Calculadoras</h3>
-                    <ul>
-                        <li><a href="#">Calculadora de Impostos</a></li>
-                        <li><a href="#">Simulador de Férias</a></li>
-                        <li><a href="#">Cálculo de Rescisão</a></li>
-                        <li><a href="#">Simulador de Lucro Presumido</a></li>
-                    </ul>
-                </div>
-                <div class="hub-category">
-                    <h3><i class="fas fa-file-alt"></i> Modelos</h3>
-                    <ul>
-                        <li><a href="#">Contrato Social</a></li>
-                        <li><a href="#">Procuração</a></li>
-                        <li><a href="#">Declaração de Faturamento</a></li>
-                        <li><a href="#">Contrato de Prestação de Serviços</a></li>
-                    </ul>
-                </div>
-                <div class="hub-category">
-                    <h3><i class="fas fa-calendar-alt"></i> Prazos</h3>
-                    <ul>
-                        <li><a href="#">Calendário Fiscal 2024</a></li>
-                        <li><a href="#">Obrigações Acessórias</a></li>
-                        <li><a href="#">Prazo de Entrega de Declarações</a></li>
-                        <li><a href="#">Agenda Trabalhista</a></li>
-                    </ul>
-                </div>
-                <div class="hub-category">
-                    <h3><i class="fas fa-gavel"></i> Legislação</h3>
-                    <ul>
-                        <li><a href="#">Leis Trabalhistas Atualizadas</a></li>
-                        <li><a href="#">Normas Fiscais Vigentes</a></li>
-                        <li><a href="#">Jurisprudências Recentes</a></li>
-                        <li><a href="#">Instruções Normativas</a></li>
-                    </ul>
-                </div>
-                <div class="hub-category">
-                    <h3><i class="fas fa-link"></i> Links Úteis</h3>
-                    <ul>
-                        <li><a href="https://www.gov.br/receitafederal">Receita Federal</a></li>
-                        <li><a href="https://www.gov.br/trabalho">Ministério do Trabalho</a></li>
-                        <li><a href="https://www.sefaz.mg.gov.br">SEFAZ-MG</a></li>
-                        <li><a href="https://www.jucesp.com.br">JUCESP</a></li>
-                    </ul>
-                </div>
-                <div class="hub-category">
-                    <h3><i class="fas fa-tools"></i> Ferramentas Online</h3>
-                    <ul>
-                        <li><a href="#">Gerador de DAS</a></li>
-                        <li><a href="#">Consulta de CNPJ</a></li>
-                        <li><a href="#">Emitir NF-e</a></li>
-                        <li><a href="#">Consulta de Débitos</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Página Área do Cliente -->
-    <div class="client-page" id="clientPage" style="display: none;">
-        <div class="container">
-            <div class="client-header">
-                <h1>Área do Cliente</h1>
-                <p>Acesso exclusivo aos serviços e documentos</p>
-            </div>
-            <div class="client-login">
-                <div class="login-box">
-                    <h3>Acesso ao Sistema</h3>
-                    <form id="loginForm">
-                        <div class="form-group">
-                            <input type="text" placeholder="CPF/CNPJ" required>
-                        </div>
-                        <div class="form-group">
-                            <input type="password" placeholder="Senha" required>
-                        </div>
-                        <button type="submit" class="btn btn-primary btn-full">Entrar</button>
-                        <div class="login-links">
-                            <a href="#">Esqueci minha senha</a>
-                            <a href="#">Primeiro acesso</a>
-                        </div>
-                    </form>
-                </div>
-                <div class="client-services">
-                    <h3>Serviços Disponíveis</h3>
-                    <ul>
-                        <li><i class="fas fa-file-pdf"></i> Acesso a Documentos</li>
-                        <li><i class="fas fa-chart-line"></i> Relatórios Financeiros</li>
-                        <li><i class="fas fa-envelope"></i> Mensagens Diretas</li>
-                        <li><i class="fas fa-calendar-check"></i> Agendamento Online</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <script src="script.js"></script>
 </body>
