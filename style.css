@@ -1804,3 +1804,98 @@ section {
         font-size: 0.95rem;
     }
 }
+
+/* =========================================== */
+/* BOTÃO "SAIBA MAIS" FIXO NOS CARDS DE SERVIÇO */
+/* =========================================== */
+
+/* Container do botão - SEMPRE VISÍVEL */
+.servico-btn-container {
+    margin-top: 25px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    text-align: center;
+    position: relative;
+}
+
+/* Botão "Saiba Mais" estilizado */
+.btn-saiba-mais {
+    background-color: var(--vermelho-suave);
+    color: var(--branco);
+    border: none;
+    padding: 12px 25px;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 4px 12px rgba(227, 6, 19, 0.2);
+    min-width: 140px;
+    justify-content: center;
+}
+
+/* Efeitos do botão */
+.btn-saiba-mais:hover {
+    background-color: var(--vermelho-institucional);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 16px rgba(227, 6, 19, 0.3);
+}
+
+.btn-saiba-mais:active {
+    transform: translateY(-1px);
+}
+
+/* Ícone do botão */
+.btn-saiba-mais i {
+    font-size: 0.9rem;
+    transition: transform 0.3s ease;
+}
+
+.btn-saiba-mais:hover i {
+    transform: translateX(4px);
+}
+
+/* Ajuste na altura do card para acomodar o botão */
+.servico-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding-bottom: 20px; /* Espaço extra na base */
+}
+
+/* Faz o conteúdo crescer e o botão ficar na base */
+.servico-desc {
+    flex-grow: 1;
+    margin-bottom: 15px;
+}
+
+/* Responsividade - Mobile */
+@media (max-width: 768px) {
+    .btn-saiba-mais {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+        min-width: 130px;
+    }
+    
+    .servico-btn-container {
+        margin-top: 20px;
+        padding-top: 15px;
+    }
+}
+
+/* Para telas muito pequenas */
+@media (max-width: 480px) {
+    .btn-saiba-mais {
+        padding: 8px 16px;
+        font-size: 0.85rem;
+        min-width: 120px;
+    }
+    
+    .servico-btn-container {
+        margin-top: 15px;
+        padding-top: 12px;
+    }
+}
