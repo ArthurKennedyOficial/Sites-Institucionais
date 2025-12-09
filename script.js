@@ -4,53 +4,42 @@ const mobileNav = document.getElementById('mobileNav');
 const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
 
 mobileToggle.addEventListener('click', () => {
+    mobileToggle.classList.toggle('active');
     mobileNav.classList.toggle('active');
-    const spans = mobileToggle.querySelectorAll('span');
     
     if (mobileNav.classList.contains('active')) {
-        spans[0].style.transform = 'rotate(45deg) translate(7px, 7px)';
-        spans[1].style.opacity = '0';
-        spans[2].style.transform = 'rotate(-45deg) translate(7px, -7px)';
+        document.body.style.overflow = 'hidden';
     } else {
-        spans[0].style.transform = 'none';
-        spans[1].style.opacity = '1';
-        spans[2].style.transform = 'none';
+        document.body.style.overflow = '';
     }
 });
 
 // Fechar menu ao clicar em um link
 mobileNavLinks.forEach(link => {
     link.addEventListener('click', () => {
+        mobileToggle.classList.remove('active');
         mobileNav.classList.remove('active');
-        const spans = mobileToggle.querySelectorAll('span');
-        spans[0].style.transform = 'none';
-        spans[1].style.opacity = '1';
-        spans[2].style.transform = 'none';
+        document.body.style.overflow = '';
     });
 });
 
 // Header scroll effect
 const header = document.getElementById('header');
-let lastScroll = 0;
 
 window.addEventListener('scroll', () => {
-    const currentScroll = window.pageYOffset;
-    
-    if (currentScroll > 100) {
+    if (window.scrollY > 100) {
         header.classList.add('scrolled');
     } else {
         header.classList.remove('scrolled');
     }
     
-    // Mostrar/ocultar botão voltar ao topo
+    // Mostrar/ocultar botão voltar ao topo (ESQUERDA)
     const backToTop = document.getElementById('backToTop');
-    if (currentScroll > 300) {
+    if (window.scrollY > 300) {
         backToTop.classList.add('visible');
     } else {
         backToTop.classList.remove('visible');
     }
-    
-    lastScroll = currentScroll;
 });
 
 // Active navigation link on scroll
@@ -62,7 +51,7 @@ function scrollActive() {
     
     sections.forEach(section => {
         const sectionHeight = section.offsetHeight;
-        const sectionTop = section.offsetTop - 100;
+        const sectionTop = section.offsetTop - 150;
         const sectionId = section.getAttribute('id');
         const navLink = document.querySelector(`.nav-link[href="#${sectionId}"]`);
         const mobileNavLink = document.querySelector(`.mobile-nav-link[href="#${sectionId}"]`);
@@ -82,16 +71,233 @@ window.addEventListener('scroll', scrollActive);
 // Smooth scroll for anchor links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
+        if (this.getAttribute('href') === '#') return;
+        
         e.preventDefault();
         const target = document.querySelector(this.getAttribute('href'));
         if (target) {
-            const offsetTop = target.offsetTop - 90;
+            const headerHeight = header.offsetHeight;
+            const targetPosition = target.offsetTop - headerHeight;
+            
             window.scrollTo({
-                top: offsetTop,
+                top: targetPosition,
                 behavior: 'smooth'
             });
+            
+            // Fechar menu mobile se estiver aberto
+            if (mobileNav.classList.contains('active')) {
+                mobileToggle.classList.remove('active');
+                mobileNav.classList.remove('active');
+                document.body.style.overflow = '';
+            }
         }
     });
+});
+
+// Botão voltar ao topo (ESQUERDA)
+const backToTop = document.getElementById('backToTop');
+if (backToTop) {
+    backToTop.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+}
+
+// Player de Vídeo Automático
+const videoPlayer = document.getElementById('institutionalVideo');
+const videoOverlay = document.getElementById('videoOverlay');
+
+if (videoPlayer && videoOverlay) {
+    // Vídeo começa automático e mudo
+    videoPlayer.muted = true;
+    videoPlayer.autoplay = true;
+    videoPlayer.loop = true;
+    videoPlayer.playsInline = true;
+    
+    // Ativar som ao clicar no vídeo
+    videoPlayer.addEventListener('click', toggleVideoSound);
+    videoOverlay.addEventListener('click', toggleVideoSound);
+    
+    function toggleVideoSound() {
+        if (videoPlayer.muted) {
+            videoPlayer.muted = false;
+            videoOverlay.classList.add('hidden');
+            videoPlayer.style.cursor = 'default';
+        } else {
+            videoPlayer.muted = true;
+            videoOverlay.classList.remove('hidden');
+        }
+    }
+    
+    // Mostrar overlay quando o som está desativado
+    videoPlayer.addEventListener('volumechange', () => {
+        if (videoPlayer.muted) {
+            videoOverlay.classList.remove('hidden');
+        }
+    });
+}
+
+// Dados dos Serviços
+const servicosData = {
+    contabilidade: {
+        title: "Assessoria Contábil",
+        icon: '<i class="fas fa-calculator"></i>',
+        description: "Gestão completa da contabilidade da sua empresa com relatórios precisos e atualizados.",
+        details: "Oferecemos serviços completos de contabilidade, incluindo escrituração contábil, elaboração de balanços patrimoniais, demonstrações de resultados (DRE), balancetes mensais, conciliações bancárias e todas as obrigações acessórias exigidas pela legislação. Nossa equipe especializada garante que sua empresa esteja sempre em conformidade com as normas contábeis vigentes.",
+        benefits: [
+            "Relatórios financeiros precisos e em tempo real",
+            "Cumprimento de todas as obrigações contábeis",
+            "Análise de desempenho financeiro da empresa",
+            "Suporte para tomada de decisões estratégicas",
+            "Planejamento contábil personalizado"
+        ],
+        whatsappMessage: "Olá! Gostaria de saber mais sobre a Assessoria Contábil da MMJ Contabilidade."
+    },
+    fiscal: {
+        title: "Assessoria Fiscal",
+        icon: '<i class="fas fa-file-invoice-dollar"></i>',
+        description: "Cumprimento de obrigações fiscais e otimização de tributos dentro da legalidade.",
+        details: "Nossa assessoria fiscal inclui apuração e recolhimento de impostos federais, estaduais e municipais, análise de créditos tributários, elaboração e entrega de declarações obrigatórias (SPED Fiscal, EFD Contribuições, DCTF, entre outras), e planejamento tributário estratégico para redução da carga fiscal de forma legal e segura.",
+        benefits: [
+            "Otimização legal da carga tributária",
+            "Cumprimento em dia de todas as obrigações fiscais",
+            "Recuperação de créditos tributários",
+            "Monitoramento de mudanças na legislação",
+            "Evitar multas e penalidades fiscais"
+        ],
+        whatsappMessage: "Olá! Gostaria de saber mais sobre a Assessoria Fiscal da MMJ Contabilidade."
+    },
+    tributaria: {
+        title: "Assessoria Tributária",
+        icon: '<i class="fas fa-balance-scale"></i>',
+        description: "Planejamento tributário estratégico para redução da carga fiscal de forma legal.",
+        details: "Desenvolvemos estratégias personalizadas de planejamento tributário para sua empresa, analisando o melhor regime de tributação (Lucro Real, Lucro Presumido ou Simples Nacional), identificando oportunidades de economia fiscal legal, e assessorando em processos administrativos e judiciais relacionados a tributos.",
+        benefits: [
+            "Redução legal da carga tributária",
+            "Escolha do melhor regime de tributação",
+            "Defesa em processos fiscais",
+            "Planejamento tributário preventivo",
+            "Consultoria em operações específicas"
+        ],
+        whatsappMessage: "Olá! Gostaria de saber mais sobre a Assessoria Tributária da MMJ Contabilidade."
+    },
+    ambiental: {
+        title: "Assessoria Ambiental",
+        icon: '<i class="fas fa-leaf"></i>',
+        description: "Consultoria para compliance ambiental e licenciamento de atividades.",
+        details: "Oferecemos consultoria especializada em legislação ambiental, auxiliando sua empresa no licenciamento ambiental, gestão de resíduos, outorgas de água, regularização de passivos ambientais e implementação de sistemas de gestão ambiental. Garantimos que sua empresa opere em conformidade com as normas ambientais vigentes.",
+        benefits: [
+            "Regularização ambiental completa",
+            "Evitar multas e penalidades ambientais",
+            "Licenciamento ambiental ágil",
+            "Gestão eficiente de resíduos",
+            "Sustentabilidade empresarial"
+        ],
+        whatsappMessage: "Olá! Gostaria de saber mais sobre a Assessoria Ambiental da MMJ Contabilidade."
+    },
+    trabalhista: {
+        title: "Assessoria Trabalhista",
+        icon: '<i class="fas fa-briefcase"></i>',
+        description: "Gestão de rotinas trabalhistas e previdenciárias com foco na legislação vigente.",
+        details: "Serviços completos de departamento pessoal, incluindo admissões, rescisões, férias, 13º salário, folha de pagamento, cálculo de encargos sociais, elaboração de contratos de trabalho, e assessoria em questões trabalhistas e previdenciárias. Mantemos sua empresa em conformidade com a CLT e legislação previdenciária.",
+        benefits: [
+            "Folha de pagamento precisa e em dia",
+            "Conformidade total com a legislação trabalhista",
+            "Redução de passivos trabalhistas",
+            "Gestão eficiente de benefícios",
+            "Consultoria em relações trabalhistas"
+        ],
+        whatsappMessage: "Olá! Gostaria de saber mais sobre a Assessoria Trabalhista da MMJ Contabilidade."
+    },
+    juridica: {
+        title: "Assessoria Jurídica",
+        icon: '<i class="fas fa-gavel"></i>',
+        description: "Suporte legal especializado em direito empresarial, tributário e trabalhista.",
+        details: "Nossa assessoria jurídica abrange todas as áreas do direito empresarial: contratos societários, constituição e alteração de empresas, recuperação judicial e extrajudicial, direito tributário, direito trabalhista, propriedade intelectual e consultoria legal preventiva. Atuamos também em processos administrativos e judiciais.",
+        benefits: [
+            "Proteção legal do patrimônio empresarial",
+            "Elaboração e revisão de contratos",
+            "Defesa em processos judiciais",
+            "Consultoria jurídica preventiva",
+            "Regularização societária completa"
+        ],
+        whatsappMessage: "Olá! Gostaria de saber mais sobre a Assessoria Jurídica da MMJ Contabilidade."
+    }
+};
+
+// Modal de Serviços
+const serviceModal = document.getElementById('serviceModal');
+const modalClose = document.getElementById('modalClose');
+const modalIcon = document.getElementById('modalIcon');
+const modalTitle = document.getElementById('modalTitle');
+const modalDescription = document.getElementById('modalDescription');
+const modalDetails = document.getElementById('modalDetails');
+const modalBenefits = document.getElementById('modalBenefits');
+const modalWhatsApp = document.getElementById('modalWhatsApp');
+const modalContact = document.getElementById('modalContact');
+
+// Abrir modal ao clicar nos cards de serviço
+const servicoCards = document.querySelectorAll('.servico-card');
+
+servicoCards.forEach(card => {
+    card.addEventListener('click', () => {
+        const serviceType = card.getAttribute('data-service');
+        const serviceData = servicosData[serviceType];
+        
+        if (serviceData) {
+            // Preencher modal com dados do serviço
+            modalIcon.innerHTML = serviceData.icon;
+            modalTitle.textContent = serviceData.title;
+            modalDescription.textContent = serviceData.description;
+            modalDetails.textContent = serviceData.details;
+            
+            // Limpar e preencher benefícios
+            modalBenefits.innerHTML = '';
+            serviceData.benefits.forEach(benefit => {
+                const li = document.createElement('li');
+                li.textContent = benefit;
+                modalBenefits.appendChild(li);
+            });
+            
+            // Configurar link do WhatsApp
+            const whatsappUrl = `https://wa.me/5537988888888?text=${encodeURIComponent(serviceData.whatsappMessage)}`;
+            modalWhatsApp.href = whatsappUrl;
+            
+            // Configurar botão de contato alternativo
+            modalContact.addEventListener('click', () => {
+                serviceModal.classList.remove('active');
+                document.getElementById('contato').scrollIntoView({ behavior: 'smooth' });
+            });
+            
+            // Mostrar modal
+            serviceModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+    });
+});
+
+// Fechar modal
+modalClose.addEventListener('click', () => {
+    serviceModal.classList.remove('active');
+    document.body.style.overflow = '';
+});
+
+// Fechar modal ao clicar fora do conteúdo
+serviceModal.addEventListener('click', (e) => {
+    if (e.target === serviceModal) {
+        serviceModal.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+});
+
+// Fechar modal com tecla ESC
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && serviceModal.classList.contains('active')) {
+        serviceModal.classList.remove('active');
+        document.body.style.overflow = '';
+    }
 });
 
 // Counter Animation for Numbers Section
@@ -106,7 +312,8 @@ const numberObserver = new IntersectionObserver((entries) => {
         }
     });
 }, {
-    threshold: 0.5
+    threshold: 0.5,
+    rootMargin: '0px 0px -100px 0px'
 });
 
 const numerosSection = document.querySelector('.numeros');
@@ -117,18 +324,26 @@ if (numerosSection) {
 function animateCounter(element) {
     const target = parseInt(element.getAttribute('data-target'));
     const duration = 2000;
-    const increment = target / (duration / 16);
-    let current = 0;
+    const startTime = Date.now();
+    const startValue = 0;
     
-    const updateCounter = () => {
-        current += increment;
-        if (current < target) {
-            element.textContent = Math.floor(current);
+    function updateCounter() {
+        const currentTime = Date.now();
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        
+        // Easing function for smooth animation
+        const easeOutQuart = 1 - Math.pow(1 - progress, 4);
+        const currentValue = Math.floor(startValue + (target - startValue) * easeOutQuart);
+        
+        element.textContent = currentValue;
+        
+        if (progress < 1) {
             requestAnimationFrame(updateCounter);
         } else {
             element.textContent = target;
         }
-    };
+    }
     
     updateCounter();
 }
@@ -172,26 +387,26 @@ if (contactForm) {
                 isValid = false;
                 input.style.borderColor = '#E30613';
                 setTimeout(() => {
-                    input.style.borderColor = '#E0E0E0';
+                    input.style.borderColor = '#E9ECEF';
                 }, 2000);
             }
         });
         
         if (isValid) {
             const submitButton = contactForm.querySelector('button[type="submit"]');
-            const originalText = submitButton.textContent;
+            const originalText = submitButton.innerHTML;
             
             // Simulação de envio
-            submitButton.textContent = 'Enviando...';
+            submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
             submitButton.style.opacity = '0.7';
             submitButton.disabled = true;
             
             setTimeout(() => {
-                submitButton.textContent = 'Mensagem Enviada!';
+                submitButton.innerHTML = '<i class="fas fa-check"></i> Mensagem Enviada!';
                 submitButton.style.background = '#48bb78';
                 
                 setTimeout(() => {
-                    submitButton.textContent = originalText;
+                    submitButton.innerHTML = originalText;
                     submitButton.style.background = '';
                     submitButton.style.opacity = '1';
                     submitButton.disabled = false;
@@ -209,19 +424,8 @@ if (contactForm) {
         
         input.addEventListener('blur', () => {
             if (input.value.trim()) {
-                input.style.borderColor = '#E0E0E0';
+                input.style.borderColor = '#E9ECEF';
             }
-        });
-    });
-}
-
-// Botão voltar ao topo
-const backToTop = document.getElementById('backToTop');
-if (backToTop) {
-    backToTop.addEventListener('click', () => {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
         });
     });
 }
@@ -236,8 +440,21 @@ if (newsletterForm) {
         
         if (email && isValidEmail(email)) {
             // Simular cadastro
-            emailInput.value = '';
-            alert('Obrigado por se inscrever em nossa newsletter!');
+            const submitBtn = newsletterForm.querySelector('button');
+            const originalHTML = submitBtn.innerHTML;
+            
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+            submitBtn.disabled = true;
+            
+            setTimeout(() => {
+                submitBtn.innerHTML = '<i class="fas fa-check"></i>';
+                setTimeout(() => {
+                    submitBtn.innerHTML = originalHTML;
+                    submitBtn.disabled = false;
+                    emailInput.value = '';
+                    alert('Obrigado por se inscrever em nossa newsletter!');
+                }, 1000);
+            }, 1500);
         } else {
             alert('Por favor, insira um e-mail válido.');
         }
@@ -250,56 +467,23 @@ function isValidEmail(email) {
     return emailRegex.test(email);
 }
 
-// Simulação de login (Área do Cliente)
-const loginForm = document.getElementById('loginForm');
-if (loginForm) {
-    loginForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const submitButton = loginForm.querySelector('button[type="submit"]');
-        const originalText = submitButton.textContent;
-        
-        submitButton.textContent = 'Entrando...';
-        submitButton.disabled = true;
-        
-        setTimeout(() => {
-            alert('Login realizado com sucesso! Redirecionando para a área do cliente...');
-            submitButton.textContent = originalText;
-            submitButton.disabled = false;
-        }, 1500);
-    });
-}
-
-// Year in footer
+// Atualizar ano no footer
 const currentYear = new Date().getFullYear();
-const footerYear = document.querySelector('.footer-bottom p');
-if (footerYear && footerYear.textContent.includes('2024')) {
-    footerYear.innerHTML = `&copy; ${currentYear} MMJ Contabilidade. Todos os direitos reservados.`;
-}
-
-// Parallax effect for hero section
-const heroSection = document.querySelector('.hero');
-if (heroSection) {
-    window.addEventListener('scroll', () => {
-        const scrolled = window.pageYOffset;
-        const parallaxSpeed = 0.5;
-        if (heroSection && scrolled < window.innerHeight) {
-            const heroContent = heroSection.querySelector('.hero-content');
-            if (heroContent) {
-                heroContent.style.transform = `translateY(${scrolled * parallaxSpeed}px)`;
-            }
-        }
-    });
+const yearElement = document.getElementById('currentYear');
+if (yearElement) {
+    yearElement.textContent = currentYear;
 }
 
 // Service cards hover effect
-const servicoCards = document.querySelectorAll('.servico-card');
 servicoCards.forEach(card => {
     card.addEventListener('mouseenter', function() {
-        this.style.transform = 'translateY(-8px)';
+        this.style.transform = 'translateY(-10px)';
     });
     
     card.addEventListener('mouseleave', function() {
-        this.style.transform = 'translateY(0)';
+        if (!this.classList.contains('active')) {
+            this.style.transform = 'translateY(0)';
+        }
     });
 });
 
@@ -310,4 +494,58 @@ window.addEventListener('load', () => {
         document.body.style.transition = 'opacity 0.5s ease';
         document.body.style.opacity = '1';
     }, 100);
+    
+    // Iniciar vídeo automaticamente
+    if (videoPlayer) {
+        videoPlayer.play().catch(e => {
+            console.log('Autoplay bloqueado pelo navegador:', e);
+        });
+    }
 });
+
+// Mapa interativo (simulação)
+const mapaPlaceholder = document.querySelector('.mapa-placeholder');
+if (mapaPlaceholder) {
+    mapaPlaceholder.addEventListener('click', () => {
+        window.open('https://www.google.com/maps/place/Pará+de+Minas+-+MG', '_blank');
+    });
+}
+
+// WhatsApp button enhancement
+const whatsappBtn = document.querySelector('.whatsapp-float');
+if (whatsappBtn) {
+    whatsappBtn.addEventListener('mouseenter', () => {
+        whatsappBtn.style.transform = 'scale(1.1) translateY(-5px)';
+    });
+    
+    whatsappBtn.addEventListener('mouseleave', () => {
+        whatsappBtn.style.transform = 'scale(1) translateY(0)';
+    });
+}
+
+// Prevenir envio de formulários vazios
+document.addEventListener('DOMContentLoaded', () => {
+    const forms = document.querySelectorAll('form');
+    forms.forEach(form => {
+        form.addEventListener('submit', (e) => {
+            const requiredInputs = form.querySelectorAll('[required]');
+            let allValid = true;
+            
+            requiredInputs.forEach(input => {
+                if (!input.value.trim()) {
+                    allValid = false;
+                    input.style.borderColor = '#E30613';
+                    setTimeout(() => {
+                        input.style.borderColor = '#E9ECEF';
+                    }, 2000);
+                }
+            });
+            
+            if (!allValid) {
+                e.preventDefault();
+                return false;
+            }
+        });
+    });
+});
+
