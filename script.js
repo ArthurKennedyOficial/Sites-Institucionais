@@ -658,3 +658,45 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
+
+// ============================================
+// CAPTURAR CLIQUE NO BOTÃO "SAIBA MAIS"
+// ============================================
+
+// Delegar evento para os botões "Saiba Mais"
+document.addEventListener('click', function(e) {
+    // Verificar se o clique foi em um botão "Saiba Mais" OU no próprio card
+    const btnSaibaMais = e.target.closest('.btn-saiba-mais');
+    const cardServico = e.target.closest('.servico-card');
+    
+    if (btnSaibaMais) {
+        // Prevenir comportamento padrão do botão
+        e.preventDefault();
+        e.stopPropagation();
+        
+        // Encontrar o card pai
+        const card = btnSaibaMais.closest('.servico-card');
+        if (card) {
+            const serviceType = card.getAttribute('data-service');
+            console.log('Botão "Saiba Mais" clicado para:', serviceType);
+            openModal(serviceType); // Usar a função openModal já existente
+        }
+    } else if (cardServico && !e.target.closest('.btn-saiba-mais')) {
+        // Se clicar no card mas NÃO no botão, também abre o modal
+        e.preventDefault();
+        const serviceType = cardServico.getAttribute('data-service');
+        console.log('Card clicado (exceto botão):', serviceType);
+        openModal(serviceType);
+    }
+});
+
+// Adicionar suporte a teclado para acessibilidade
+document.querySelectorAll('.btn-saiba-mais').forEach(btn => {
+    btn.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            this.click();
+        }
+    });
+});
+
