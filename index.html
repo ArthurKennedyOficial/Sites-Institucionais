@@ -6,11 +6,9 @@
     <title>MMJ Contabilidade | Tradição desde 1971</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 </head>
 <body>
-    <!-- Botão WhatsApp Flutuante -->
+    <!-- Botão WhatsApp -->
     <a href="https://wa.me/5537988888888?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20os%20serviços%20da%20MMJ%20Contabilidade" 
        class="whatsapp-float" 
        target="_blank" 
@@ -23,7 +21,7 @@
         <i class="fas fa-chevron-up"></i>
     </button>
 
-    <!-- Modal de Detalhes do Serviço -->
+    <!-- Modal de Serviços -->
     <div class="service-modal" id="serviceModal">
         <div class="modal-content">
             <button class="modal-close" id="modalClose">&times;</button>
@@ -53,7 +51,6 @@
         <div class="container header-container">
             <div class="logo-container">
                 <a href="#inicio" class="logo">
-                    <!-- Logo como imagem -->
                     <img src="midias/logo.webp" 
                          alt="MMJ Contabilidade" 
                          class="logo-img">
@@ -68,7 +65,8 @@
                     <li><a href="#numeros" class="nav-link">Nossos Números</a></li>
                     <li><a href="#servicos" class="nav-link">Serviços</a></li>
                     <li><a href="#diferenciais" class="nav-link">Diferenciais</a></li>
-                    <li><a href="hub-ferramentas.html" class="nav-link">Ferramentas</a></li>
+                    <li><a href="#clientes" class="nav-link">Clientes</a></li>
+                    <li><a href="#equipe" class="nav-link">Equipe</a></li>
                     <li><a href="#contato" class="nav-link">Contato</a></li>
                     <li><a href="area-cliente.html" class="btn-client">
                         <i class="fas fa-user-circle"></i>
@@ -93,7 +91,8 @@
                 <li><a href="#numeros" class="mobile-nav-link">Nossos Números</a></li>
                 <li><a href="#servicos" class="mobile-nav-link">Serviços</a></li>
                 <li><a href="#diferenciais" class="mobile-nav-link">Diferenciais</a></li>
-                <li><a href="hub-ferramentas.html" class="mobile-nav-link">Hub de Ferramentas</a></li>
+                <li><a href="#clientes" class="mobile-nav-link">Clientes</a></li>
+                <li><a href="#equipe" class="mobile-nav-link">Equipe</a></li>
                 <li><a href="#contato" class="mobile-nav-link">Contato</a></li>
                 <li><a href="area-cliente.html" class="mobile-nav-link client-link">
                     <i class="fas fa-user-circle"></i>
@@ -173,10 +172,10 @@
                     </a>
                 </div>
                 <div class="sobre-image">
-                    <!-- Campo para imagem responsiva -->
+                    <!-- Imagem responsiva -->
                     <div class="responsive-image">
                         <img src="midias/fundador.png" 
-                             alt="Fundador Mario Martins Jacinto" 
+                             alt="Sede da MMJ Contabilidade em Pará de Minas" 
                              class="image-fluid">
                         <div class="image-caption">
                             <p>Fundador e Presidente</p>
@@ -320,44 +319,199 @@
     </section>
 
     <!-- Diferenciais -->
-<section class="diferenciais" id="diferenciais">
-    <div class="container">
-        <div class="section-header">
-            <span class="section-tag">Por que nos escolher</span>
-            <h2 class="section-title">Nossos Diferenciais</h2>
+    <section class="diferenciais" id="diferenciais">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Por que nos escolher</span>
+                <h2 class="section-title">Nossos Diferenciais</h2>
+            </div>
+            <div class="diferenciais-grid">
+                <div class="diferencial-card">
+                    <div class="diferencial-icon">
+                        <i class="fas fa-history"></i>
+                    </div>
+                    <h3 class="diferencial-title">Tradição e Inovação</h3>
+                    <p class="diferencial-desc">Mais de 50 anos no mercado combinados com as mais modernas tecnologias contábeis.</p>
+                </div>
+                <div class="diferencial-card">
+                    <div class="diferencial-icon">
+                        <i class="fas fa-user-shield"></i>
+                    </div>
+                    <h3 class="diferencial-title">Equipe Especializada</h3>
+                    <p class="diferencial-desc">+60 colaboradores com formação específica e atualização constante.</p>
+                </div>
+                <div class="diferencial-card">
+                    <div class="diferencial-icon">
+                        <i class="fas fa-map-marked-alt"></i>
+                    </div>
+                    <h3 class="diferencial-title">Atendimento Regional</h3>
+                    <p class="diferencial-desc">3 filiais estrategicamente localizadas para melhor atender o interior mineiro.</p>
+                </div>
+                <div class="diferencial-card">
+                    <div class="diferencial-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3 class="diferencial-title">Suporte Personalizado</h3>
+                    <p class="diferencial-desc">Atendimento dedicado e soluções customizadas para cada segmento de cliente.</p>
+                </div>
+            </div>
         </div>
-        <div class="diferenciais-grid">
-            <div class="diferencial-card">
-                <div class="diferencial-icon">
-                    <i class="fas fa-history"></i>
-                </div>
-                <h3 class="diferencial-title">Tradição e Inovação</h3>
-                <p class="diferencial-desc">Mais de 50 anos no mercado combinados com as mais modernas tecnologias contábeis.</p>
+    </section>
+
+    <!-- Principais Clientes -->
+    <section class="clientes" id="clientes">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Nossos Clientes</span>
+                <h2 class="section-title">Principais Empresas que Atendemos</h2>
+                <p class="section-subtitle">Conheça algumas das empresas que confiam em nossos serviços</p>
             </div>
-            <div class="diferencial-card">
-                <div class="diferencial-icon">
-                    <i class="fas fa-user-shield"></i>
+            <div class="clientes-container">
+                <div class="clientes-track" id="clientesTrack">
+                    <!-- Logos serão adicionadas via JavaScript -->
                 </div>
-                <h3 class="diferencial-title">Equipe Especializada</h3>
-                <p class="diferencial-desc">+60 colaboradores com formação específica e atualização constante.</p>
-            </div>
-            <div class="diferencial-card">
-                <div class="diferencial-icon">
-                    <i class="fas fa-map-marked-alt"></i>
-                </div>
-                <h3 class="diferencial-title">Atendimento Regional</h3>
-                <p class="diferencial-desc">3 filiais estrategicamente localizadas para melhor atender o interior mineiro.</p>
-            </div>
-            <div class="diferencial-card">
-                <div class="diferencial-icon">
-                    <i class="fas fa-headset"></i>
-                </div>
-                <h3 class="diferencial-title">Suporte Personalizado</h3>
-                <p class="diferencial-desc">Atendimento dedicado e soluções customizadas para cada segmento de cliente.</p>
             </div>
         </div>
-    </div>
-</section>
+    </section>
+
+    <!-- Equipe -->
+    <section class="equipe" id="equipe">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Nossa Equipe</span>
+                <h2 class="section-title">Profissionais Especializados</h2>
+                <p class="section-subtitle">+60 colaboradores dedicados ao sucesso do seu negócio</p>
+            </div>
+            <div class="equipe-grid">
+                <!-- Membro 1 -->
+                <div class="membro-card">
+                    <div class="membro-imagem">
+                        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" 
+                             alt="João Silva - Diretor Contábil">
+                        <div class="membro-overlay">
+                            <div class="membro-social">
+                                <a href="#"><i class="fab fa-linkedin"></i></a>
+                                <a href="#"><i class="fas fa-envelope"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="membro-info">
+                        <h3>João Silva</h3>
+                        <p class="membro-cargo">Diretor Contábil</p>
+                        <p class="membro-experiencia">25 anos de experiência</p>
+                        <p class="membro-desc">Especialista em contabilidade empresarial e planejamento tributário.</p>
+                    </div>
+                </div>
+                
+                <!-- Membro 2 -->
+                <div class="membro-card">
+                    <div class="membro-imagem">
+                        <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" 
+                             alt="Maria Santos - Gerente Fiscal">
+                        <div class="membro-overlay">
+                            <div class="membro-social">
+                                <a href="#"><i class="fab fa-linkedin"></i></a>
+                                <a href="#"><i class="fas fa-envelope"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="membro-info">
+                        <h3>Maria Santos</h3>
+                        <p class="membro-cargo">Gerente Fiscal</p>
+                        <p class="membro-experiencia">18 anos de experiência</p>
+                        <p class="membro-desc">Especialista em legislação fiscal e planejamento tributário estratégico.</p>
+                    </div>
+                </div>
+                
+                <!-- Membro 3 -->
+                <div class="membro-card">
+                    <div class="membro-imagem">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" 
+                             alt="Carlos Oliveira - Coordenador Trabalhista">
+                        <div class="membro-overlay">
+                            <div class="membro-social">
+                                <a href="#"><i class="fab fa-linkedin"></i></a>
+                                <a href="#"><i class="fas fa-envelope"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="membro-info">
+                        <h3>Carlos Oliveira</h3>
+                        <p class="membro-cargo">Coordenador Trabalhista</p>
+                        <p class="membro-experiencia">15 anos de experiência</p>
+                        <p class="membro-desc">Especialista em legislação trabalhista e previdenciária.</p>
+                    </div>
+                </div>
+                
+                <!-- Membro 4 -->
+                <div class="membro-card">
+                    <div class="membro-imagem">
+                        <img src="https://img.freepik.com/fotos-gratis/mulher-de-tiro-medio-posando-no-escritorio_23-2149392072.jpg?semt=ais_se_enriched&w=740&q=80" 
+                             alt="Ana Costa - Consultora Jurídica">
+                        <div class="membro-overlay">
+                            <div class="membro-social">
+                                <a href="#"><i class="fab fa-linkedin"></i></a>
+                                <a href="#"><i class="fas fa-envelope"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="membro-info">
+                        <h3>Ana Costa</h3>
+                        <p class="membro-cargo">Consultora Jurídica</p>
+                        <p class="membro-experiencia">12 anos de experiência</p>
+                        <p class="membro-desc">Especialista em direito empresarial e contratos societários.</p>
+                    </div>
+                </div>
+                
+                <!-- Membro 5 -->
+                <div class="membro-card">
+                    <div class="membro-imagem">
+                        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" 
+                             alt="Roberto Almeida - Especialista Tributário">
+                        <div class="membro-overlay">
+                            <div class="membro-social">
+                                <a href="#"><i class="fab fa-linkedin"></i></a>
+                                <a href="#"><i class="fas fa-envelope"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="membro-info">
+                        <h3>Roberto Almeida</h3>
+                        <p class="membro-cargo">Especialista Tributário</p>
+                        <p class="membro-experiencia">20 anos de experiência</p>
+                        <p class="membro-desc">Especialista em planejamento tributário e consultoria fiscal.</p>
+                    </div>
+                </div>
+                
+                <!-- Membro 6 -->
+                <div class="membro-card">
+                    <div class="membro-imagem">
+                        <img src="https://images.unsplash.com/photo-1544725176-7c40e5a71c5e?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" 
+                             alt="Patrícia Lima - Gerente de Contas">
+                        <div class="membro-overlay">
+                            <div class="membro-social">
+                                <a href="#"><i class="fab fa-linkedin"></i></a>
+                                <a href="#"><i class="fas fa-envelope"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="membro-info">
+                        <h3>Patrícia Lima</h3>
+                        <p class="membro-cargo">Gerente de Contas</p>
+                        <p class="membro-experiencia">10 anos de experiência</p>
+                        <p class="membro-desc">Especialista em atendimento personalizado e gestão de relacionamento.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="equipe-more">
+                <p class="equipe-total">+54 profissionais especializados completam nossa equipe</p>
+                <a href="#contato" class="btn btn-outline">
+                    <i class="fas fa-users"></i>
+                    Conheça toda nossa equipe
+                </a>
+            </div>
+        </div>
+    </section>
 
     <!-- Contato -->
     <section class="contato" id="contato">
@@ -457,6 +611,7 @@
                         <li><a href="#servicos">Serviços</a></li>
                         <li><a href="#numeros">Nossos Números</a></li>
                         <li><a href="#diferenciais">Diferenciais</a></li>
+                        <li><a href="#equipe">Equipe</a></li>
                         <li><a href="#contato">Contato</a></li>
                     </ul>
                 </div>
