@@ -139,7 +139,15 @@ if (videoPlayer && videoOverlay) {
     });
 }
 
-// Dados dos Serviços
+// ============================================
+// MODAL DE SERVIÇOS - SOLUÇÃO DEFINITIVA
+// ============================================
+
+// Referências simples e diretas
+const serviceModal = document.getElementById('serviceModal');
+const modalClose = document.getElementById('modalClose');
+
+// Dados dos serviços (mantido igual)
 const servicosData = {
     contabilidade: {
         title: "Assessoria Contábil",
@@ -227,77 +235,109 @@ const servicosData = {
     }
 };
 
-// Modal de Serviços
-const serviceModal = document.getElementById('serviceModal');
-const modalClose = document.getElementById('modalClose');
-const modalIcon = document.getElementById('modalIcon');
-const modalTitle = document.getElementById('modalTitle');
-const modalDescription = document.getElementById('modalDescription');
-const modalDetails = document.getElementById('modalDetails');
-const modalBenefits = document.getElementById('modalBenefits');
-const modalWhatsApp = document.getElementById('modalWhatsApp');
-const modalContact = document.getElementById('modalContact');
-
-// Abrir modal ao clicar nos cards de serviço
-const servicoCards = document.querySelectorAll('.servico-card');
-
-servicoCards.forEach(card => {
-    card.addEventListener('click', () => {
-        const serviceType = card.getAttribute('data-service');
-        const serviceData = servicosData[serviceType];
-        
-        if (serviceData) {
-            // Preencher modal com dados do serviço
-            modalIcon.innerHTML = serviceData.icon;
-            modalTitle.textContent = serviceData.title;
-            modalDescription.textContent = serviceData.description;
-            modalDetails.textContent = serviceData.details;
-            
-            // Limpar e preencher benefícios
-            modalBenefits.innerHTML = '';
-            serviceData.benefits.forEach(benefit => {
-                const li = document.createElement('li');
-                li.textContent = benefit;
-                modalBenefits.appendChild(li);
-            });
-            
-            // Configurar link do WhatsApp
-            const whatsappUrl = `https://wa.me/5537988888888?text=${encodeURIComponent(serviceData.whatsappMessage)}`;
-            modalWhatsApp.href = whatsappUrl;
-            
-            // Configurar botão de contato alternativo
-            modalContact.addEventListener('click', () => {
-                serviceModal.classList.remove('active');
-                document.getElementById('contato').scrollIntoView({ behavior: 'smooth' });
-            });
-            
-            // Mostrar modal
-            serviceModal.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
+// FUNÇÃO SIMPLES PARA ABRIR MODAL
+function openModal(serviceType) {
+    const service = servicosData[serviceType];
+    if (!service) return;
+    
+    // Preencher conteúdo do modal
+    document.getElementById('modalIcon').innerHTML = service.icon;
+    document.getElementById('modalTitle').textContent = service.title;
+    document.getElementById('modalDescription').textContent = service.description;
+    document.getElementById('modalDetails').textContent = service.details;
+    
+    // Preencher benefícios
+    const benefitsList = document.getElementById('modalBenefits');
+    benefitsList.innerHTML = '';
+    service.benefits.forEach(benefit => {
+        const li = document.createElement('li');
+        li.textContent = benefit;
+        benefitsList.appendChild(li);
     });
-});
+    
+    // ========== SOLUÇÃO DEFINITIVA PARA WHATSAPP ==========
+    // Criar URL do WhatsApp
+    const phoneNumber = '5537988888888'; // Troque pelo número real
+    const message = encodeURIComponent(service.whatsappMessage);
+    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${message}`;
+    
+    // Configurar o botão WhatsApp - FORMA DIRETA
+    const whatsappBtn = document.getElementById('modalWhatsApp');
+    
+    // REMOVER TODOS OS EVENT LISTENERS ANTIGOS
+    const newWhatsappBtn = whatsappBtn.cloneNode(true);
+    whatsappBtn.parentNode.replaceChild(newWhatsappBtn, whatsappBtn);
+    
+    // Configurar o novo botão
+    newWhatsappBtn.href = whatsappUrl;
+    newWhatsappBtn.target = '_blank';
+    newWhatsappBtn.rel = 'noopener noreferrer';
+    
+    // Adicionar evento para fechar modal antes de abrir WhatsApp
+    newWhatsappBtn.addEventListener('click', function(e) {
+        // Fechar modal imediatamente
+        closeModal();
+        
+        // Pequeno delay para garantir que o modal fechou
+        setTimeout(() => {
+            // O navegador abrirá o link automaticamente devido ao href
+        }, 50);
+    });
+    
+    // Configurar botão de contato
+    document.getElementById('modalContact').onclick = function() {
+        closeModal();
+        setTimeout(() => {
+            document.getElementById('contato').scrollIntoView({ 
+                behavior: 'smooth' 
+            });
+        }, 200);
+    };
+    
+    // Abrir modal
+    serviceModal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
 
-// Fechar modal
-modalClose.addEventListener('click', () => {
+// FUNÇÃO PARA FECHAR MODAL
+function closeModal() {
     serviceModal.classList.remove('active');
     document.body.style.overflow = '';
-});
+}
 
-// Fechar modal ao clicar fora do conteúdo
-serviceModal.addEventListener('click', (e) => {
-    if (e.target === serviceModal) {
-        serviceModal.classList.remove('active');
-        document.body.style.overflow = '';
-    }
-});
-
-// Fechar modal com tecla ESC
-document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && serviceModal.classList.contains('active')) {
-        serviceModal.classList.remove('active');
-        document.body.style.overflow = '';
-    }
+// ========== INICIALIZAÇÃO ==========
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('Inicializando modal de serviços...');
+    
+    // Adicionar evento a todos os cards de serviço
+    document.querySelectorAll('.servico-card').forEach(card => {
+        card.addEventListener('click', function(e) {
+            e.preventDefault();
+            const serviceType = this.getAttribute('data-service');
+            console.log('Abrindo modal para:', serviceType);
+            openModal(serviceType);
+        });
+    });
+    
+    // Evento para fechar modal com botão X
+    modalClose.addEventListener('click', closeModal);
+    
+    // Evento para fechar modal clicando fora
+    serviceModal.addEventListener('click', function(e) {
+        if (e.target === this) {
+            closeModal();
+        }
+    });
+    
+    // Evento para fechar modal com ESC
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && serviceModal.classList.contains('active')) {
+            closeModal();
+        }
+    });
+    
+    // Teste rápido
+    console.log('Modal inicializado. Cards encontrados:', document.querySelectorAll('.servico-card').length);
 });
 
 // Counter Animation for Numbers Section
@@ -349,7 +389,7 @@ function animateCounter(element) {
 }
 
 // Animação de entrada para elementos
-const fadeElements = document.querySelectorAll('.servico-card, .diferencial-card, .numero-card');
+const fadeElements = document.querySelectorAll('.servico-card, .diferencial-card, .numero-card, .membro-card');
 
 const fadeObserver = new IntersectionObserver((entries) => {
     entries.forEach((entry, index) => {
@@ -371,6 +411,76 @@ fadeElements.forEach(element => {
     element.style.transform = 'translateY(30px)';
     element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
     fadeObserver.observe(element);
+});
+
+// Seção de Clientes - Marquee Infinito (CORRIGIDO)
+document.addEventListener('DOMContentLoaded', function() {
+    const clientesTrack = document.getElementById('clientesTrack');
+    if (!clientesTrack) return;
+
+    // Logos dos clientes
+    const clientesLogos = [
+        'https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Microsoft_logo.svg/240px-Microsoft_logo.svg.png',
+        'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Amazon_logo.svg/240px-Amazon_logo.svg.png',
+        'https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Apple_logo_black.svg/240px-Apple_logo_black.svg.png',
+        'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_2015_logo.svg/240px-Google_2015_logo.svg.png',
+        'https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Netflix_2015_logo.svg/240px-Netflix_2015_logo.svg.png',
+        'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/LG_logo_%282014%29.svg/640px-LG_logo_%282014%29.svg.png',
+        'https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Microsoft_logo.svg/240px-Microsoft_logo.svg.png',
+        
+    ];
+
+    // Criar track com duplicação para loop infinito
+    function criarTrackInfinito() {
+        clientesTrack.innerHTML = '';
+        
+        // Adicionar 2 cópias completas
+        for (let copia = 0; copia < 2; copia++) {
+            clientesLogos.forEach((logo, index) => {
+                const img = document.createElement('img');
+                img.src = logo;
+                img.alt = `Cliente ${index + 1}`;
+                img.className = 'cliente-logo';
+                img.loading = 'lazy';
+                clientesTrack.appendChild(img);
+            });
+        }
+    }
+
+    // Inicializar
+    criarTrackInfinito();
+
+    // CORREÇÃO: Ajustar velocidade da animação (mais rápida no mobile)
+    function ajustarVelocidade() {
+        const isMobile = window.innerWidth <= 768;
+        if (isMobile) {
+            clientesTrack.style.animationDuration = '15s'; // Mais rápido no mobile
+        } else {
+            clientesTrack.style.animationDuration = '25s'; // Mais rápido no desktop também
+        }
+    }
+
+    // Ajustar velocidade na inicialização e no resize
+    ajustarVelocidade();
+    window.addEventListener('resize', ajustarVelocidade);
+
+    // Controle de pausa com hover
+    clientesTrack.addEventListener('mouseenter', function() {
+        this.style.animationPlayState = 'paused';
+    });
+
+    clientesTrack.addEventListener('mouseleave', function() {
+        this.style.animationPlayState = 'running';
+    });
+
+    // Otimização: pausar quando janela não está visível
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            clientesTrack.style.animationPlayState = 'paused';
+        } else {
+            clientesTrack.style.animationPlayState = 'running';
+        }
+    });
 });
 
 // Form validation and handling
@@ -548,4 +658,3 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
-
