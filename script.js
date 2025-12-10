@@ -340,6 +340,7 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log('Modal inicializado. Cards encontrados:', document.querySelectorAll('.servico-card').length);
 });
 
+/*
 // Counter Animation for Numbers Section
 const numberObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -387,6 +388,8 @@ function animateCounter(element) {
     
     updateCounter();
 }
+
+*/
 
 // Animação de entrada para elementos
 const fadeElements = document.querySelectorAll('.servico-card, .diferencial-card, .numero-card, .membro-card');
@@ -699,4 +702,5 @@ document.querySelectorAll('.btn-saiba-mais').forEach(btn => {
         }
     });
 });
+
 
